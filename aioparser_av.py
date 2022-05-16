@@ -81,13 +81,13 @@ async def load_site_info():
 async def run_tasks():
     global items, cashes, urls, years
     await load_site_info()
-    # all_info = list(zip(items, years, cashes, urls))
-    #
-    # for i in all_info:
-    #     print(f'\n\nМарка: {i[0]}, Год: {i[1]}, Цена: {i[2]}, Ссылка: {i[-1]}\n\n')
-    # print(len(all_info))
-    # end_time = time.time() - start_time
-    # print(f'\nВремя работы: {end_time} секунд')
+    all_info = list(zip(items, years, cashes, urls))
+
+    for i in all_info:
+        print(f'\n\nМарка: {i[0]}, Год: {i[1]}, Цена: {i[2]}, Ссылка: {i[-1]}\n\n')
+    print(len(all_info))
+    end_time = time.time() - start_time
+    print(f'\nВремя работы: {end_time} секунд')
 
 
 if __name__ == '__main__':
