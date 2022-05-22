@@ -5,9 +5,7 @@ import asyncio
 import aiohttp
 import ssl
 from bs4 import BeautifulSoup
-import re
 
-"""pip install -r requirments.txt"""
 
 start_time = time.time()
 
@@ -55,23 +53,8 @@ async def load_site_info():
     conn = aiohttp.TCPConnector(ssl=ssl_context)
 
     async with aiohttp.ClientSession(connector=conn) as session:
-        async with session.get(url='https://anekdotov.net') as response:
-            try:
-                response_text = await response.text()
-                html_source = response_text
-
-                page_info = BeautifulSoup(html_source, 'html.parser')
-
-                page = page_info.find_all('a', string='Д А Л Е Е!', href=True)
-                for href in page:
-                    print("Found the URL:", href['href'])
-                    count_of_pages = int(re.sub('[\\D]', '', href['href']))
-
-            except Exception as e:
-                print(f'Error: {repr(e)}')
-
         tasks = []
-        for page in range(count_of_pages - 10, count_of_pages):
+        for page in range(1, 51):
             task_1 = asyncio.create_task(get_page_info(session, page))
             tasks.append(task_1)
 
